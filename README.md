@@ -40,10 +40,13 @@ python migrate_csv.py
 Script chỉ nhập vào bảng rỗng và từ chối chạy tiếp nếu bảng đã có dữ liệu. Script
 không nhập lại ID cũ; Supabase tự sinh ID mới. Nếu một lần nhập bị lỗi giữa chừng,
 kiểm tra dữ liệu trên Supabase trước khi xóa dữ liệu nhập dở và chạy lại.
+Sau khi xác nhận giao dịch đã có trên Supabase, giữ file CSV ở máy cá nhân; file
+này đã được thêm vào `.gitignore` để tránh đẩy dữ liệu tài chính lên GitHub.
 
 ## Deploy lên Streamlit Community Cloud
 
-1. Đẩy mã nguồn (không gồm `.streamlit/secrets.toml`) lên GitHub.
+1. Đẩy mã nguồn lên GitHub. `.streamlit/secrets.toml` và
+   `data/transactions.csv` đã được loại khỏi Git bằng `.gitignore`.
 2. Tạo app Community Cloud từ repository, chọn `app.py` làm entry point.
 3. Trong App settings → Secrets, khai báo cùng ba giá trị
    `SUPABASE_URL`, `SUPABASE_KEY`, `APP_PASSWORD` theo định dạng TOML ở trên.

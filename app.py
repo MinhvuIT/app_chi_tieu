@@ -41,7 +41,11 @@ def format_vnd(amount: float) -> str:
     return f"{amount:,.0f}".replace(",", ".") + " ₫"
 
 
-st.set_page_config(page_title="Quản lý chi tiêu", page_icon="💰", layout="wide")
+st.set_page_config(
+    page_title="Quản lý chi tiêu",
+    page_icon="https://supabase.com/favicon/favicon.ico",
+    layout="wide",
+)
 
 try:
     app_password = st.secrets["APP_PASSWORD"]
