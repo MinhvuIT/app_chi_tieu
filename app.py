@@ -47,6 +47,154 @@ st.set_page_config(
     layout="wide",
 )
 
+st.markdown(
+    """
+    <style>
+    @keyframes neonFlow {
+        0% { background-position: 0% 50%; }
+        100% { background-position: 200% 50%; }
+    }
+
+    [data-testid="stAppViewContainer"] {
+        background:
+            radial-gradient(ellipse at 12% 0%, rgba(0, 255, 204, 0.10), transparent 34%),
+            radial-gradient(ellipse at 92% 8%, rgba(255, 0, 127, 0.09), transparent 30%),
+            #0B0E14;
+    }
+
+    [data-testid="stHeader"] {
+        background: rgba(11, 14, 20, 0.72);
+    }
+
+    .block-container {
+        max-width: 1440px;
+        padding-top: 2rem;
+        padding-bottom: 3rem;
+    }
+
+    h1 {
+        background: linear-gradient(100deg, #00FFCC 10%, #B06CFF 55%, #FF4DA6 95%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        filter: drop-shadow(0 0 16px rgba(0, 255, 204, 0.20));
+        letter-spacing: -0.035em;
+    }
+
+    h2, h3 {
+        color: #E6EDF2;
+        border-left: 3px solid #00FFCC;
+        padding-left: 0.65rem;
+    }
+
+    [data-testid="stSidebar"] {
+        background: linear-gradient(165deg, #161B22 0%, #10151D 72%, #15101D 100%);
+        border-right: 1px solid rgba(0, 255, 204, 0.20);
+    }
+
+    [data-testid="stMetric"] {
+        background: linear-gradient(145deg, rgba(22, 27, 34, 0.96), rgba(17, 24, 34, 0.92));
+        border: 1px solid rgba(0, 255, 204, 0.27);
+        border-radius: 14px;
+        padding: 1rem 1.15rem;
+        box-shadow: 0 0 18px rgba(0, 255, 204, 0.08), inset 0 0 18px rgba(0, 255, 204, 0.025);
+        transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+    }
+
+    [data-testid="stMetric"]:hover {
+        border-color: rgba(0, 255, 204, 0.62);
+        box-shadow: 0 0 24px rgba(0, 255, 204, 0.15);
+        transform: translateY(-2px);
+    }
+
+    [data-testid="stMetricLabel"] {
+        color: #A9B7C6;
+    }
+
+    [data-testid="stMetricValue"] {
+        color: #00FFCC;
+        text-shadow: 0 0 14px rgba(0, 255, 204, 0.28);
+    }
+
+    [data-testid="stForm"] {
+        background: rgba(22, 27, 34, 0.55);
+        border: 1px solid rgba(0, 255, 204, 0.24);
+        border-radius: 14px;
+        padding: 1rem;
+        box-shadow: 0 0 20px rgba(0, 255, 204, 0.055);
+    }
+
+    [data-testid="stTextInput"] input,
+    [data-testid="stNumberInput"] input,
+    [data-testid="stTextArea"] textarea,
+    [data-baseweb="select"] > div {
+        background-color: #111720;
+        border-color: rgba(255, 0, 127, 0.48);
+        border-radius: 9px;
+        transition: border-color 160ms ease, box-shadow 160ms ease;
+    }
+
+    [data-testid="stTextInput"] input:focus,
+    [data-testid="stNumberInput"] input:focus,
+    [data-testid="stTextArea"] textarea:focus,
+    [data-baseweb="select"] > div:focus-within {
+        border-color: #00FFCC;
+        box-shadow: 0 0 0 1px #00FFCC, 0 0 13px rgba(0, 255, 204, 0.22);
+    }
+
+    button[kind="primary"] {
+        border: 1px solid rgba(0, 255, 204, 0.65);
+        border-radius: 9px;
+        background: linear-gradient(105deg, #00BFA5, #7255D9, #D83B8D);
+        background-size: 200% 100%;
+        box-shadow: 0 0 16px rgba(0, 255, 204, 0.16);
+        transition: background-position 220ms ease, box-shadow 180ms ease, transform 180ms ease;
+    }
+
+    button[kind="primary"]:hover {
+        background-position: 100% 0;
+        box-shadow: 0 0 22px rgba(255, 0, 127, 0.25);
+        transform: translateY(-1px);
+    }
+
+    [data-testid="stProgress"] > div {
+        background: rgba(230, 237, 242, 0.10);
+        border-radius: 999px;
+        overflow: hidden;
+    }
+
+    [data-testid="stProgress"] > div > div {
+        background: linear-gradient(90deg, #00FFCC, #8B5CFF, #FF4DA6, #00FFCC);
+        background-size: 200% 100%;
+        border-radius: 999px;
+        animation: neonFlow 5s linear infinite;
+        transition: width 350ms ease;
+        box-shadow: 0 0 12px rgba(0, 255, 204, 0.40);
+    }
+
+    [data-testid="stAlert"] {
+        border-radius: 10px;
+        box-shadow: 0 0 14px rgba(0, 255, 204, 0.055);
+    }
+
+    [data-testid="stDataFrame"] {
+        border: 1px solid rgba(0, 255, 204, 0.20);
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
 try:
     app_password = st.secrets["APP_PASSWORD"]
 except (KeyError, StreamlitSecretNotFoundError):
@@ -209,15 +357,24 @@ else:
         expense_by_category,
         names="category",
         values="amount",
+        color="category",
         hole=0.35,
         title="Tỷ trọng chi tiêu",
+        color_discrete_sequence=px.colors.sequential.Plasma,
     )
     figure.update_traces(
         textposition="inside",
         textinfo="percent+label",
         hovertemplate="%{label}<br>%{value:,.0f} ₫<extra></extra>",
     )
-    figure.update_layout(margin=dict(t=55, b=10, l=10, r=10))
+    figure.update_layout(
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
+        font=dict(color="#E6EDF2"),
+        title_font=dict(color="#00FFCC"),
+        legend=dict(font=dict(color="#E6EDF2")),
+        margin=dict(t=55, b=10, l=10, r=10),
+    )
     st.plotly_chart(figure, width="stretch")
 
 st.subheader("Lịch sử giao dịch")
